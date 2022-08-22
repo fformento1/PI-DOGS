@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const router = Router();
 const fetch = require("node-fetch");
+const { route } = require("./Temperaments");
 
 router.get("/", (req, res) => {
   fetch("https://api.thedogapi.com/v1/breeds")
@@ -48,13 +49,15 @@ router.get("/:id", (req, res) => {
           life_span: data.life_span,
         });
       } else {
-        res
-          .status(400)
-          .json({
-            error: "No se encontró una raza de perro con el ID indicado",
-          });
+        res.status(400).json({
+          error: "No se encontró una raza de perro con el ID indicado",
+        });
       }
     });
+});
+
+router.post("/", (req, res) => {
+  res.json("holaaaaaa");
 });
 
 module.exports = router;
