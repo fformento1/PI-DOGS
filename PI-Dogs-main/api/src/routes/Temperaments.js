@@ -4,7 +4,7 @@ const fetch = require("node-fetch");
 const { conseguirTemperamentos, temperamentosSinRepetir } = require("./utils");
 const { Temperament } = require("../db");
 
-router.get("/", async (req, res) => {
+/* router.get("/", async (req, res) => {
   let dbTemperament = await Temperament.findAll();
   if (dbTemperament.length === 0) {
     console.log("Estoy buscando en la api");
@@ -17,13 +17,11 @@ router.get("/", async (req, res) => {
   } else {
     res.json(dbTemperament);
   }
-});
+}); */
 
-/* router.get("/", (req, res) => {
-  Temperament.findAll()
-  .then((data) => {
+router.get("/", (req, res) => {
+  Temperament.findAll().then((data) => {
     if (data.length === 0) {
-      console.log("Estoy buscando en la api");
       fetch("http://localhost:3001/dogs")
         .then((data) => data.json())
         .then((data) => conseguirTemperamentos(data))
@@ -35,6 +33,5 @@ router.get("/", async (req, res) => {
     }
   });
 });
- */
 
 module.exports = router;

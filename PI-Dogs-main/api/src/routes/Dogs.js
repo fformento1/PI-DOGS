@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const router = Router();
 const fetch = require("node-fetch");
-const { route } = require("./Temperaments");
+const { Dog } = require("../db");
 
 router.get("/", (req, res) => {
   fetch("https://api.thedogapi.com/v1/breeds")
@@ -16,6 +16,15 @@ router.get("/", (req, res) => {
         };
       })
     )
+    .then((data) => {
+      return Dog.findAll().then((el) => {
+        if (el.length !== 0) {
+          return data.concat(el);
+        } else {
+          return data;
+        }
+      });
+    })
     .then((data) => {
       if (req.query.name) {
         let dogFiltered = data.filter((dog) =>
@@ -35,29 +44,50 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-  fetch("https://api.thedogapi.com/v1/breeds")
-    .then((data) => data.json())
-    .then((data) => data.find((el) => el.id === parseInt(req.params.id)))
-    .then((data) => {
-      if (data) {
-        res.json({
-          image: data.image.url,
-          name: data.name,
-          temperament: data.temperament,
-          height: data.height.metric,
-          weight: data.weight.metric,
-          life_span: data.life_span,
-        });
-      } else {
+  if (req.params.id.length <= 3) {
+    fetch("https://api.thedogapi.com/v1/breeds")
+      .then((data) => data.json())
+      .then((data) => data.find((el) => el.id === parseInt(req.params.id)))
+      .then((data) => {
+        if (data) {
+          res.json({
+            image: data.image.url,
+            name: data.name,
+            temperament: data.temperament,
+            height: data.height.metric,
+            weight: data.weight.metric,
+            life_span: data.life_span,
+          });
+        } else {
+          res.status(400).json({
+            error: "No se encontró una raza de perro con el ID indicado",
+          });
+        }
+      });
+  } else {
+    Dog.findOne({ where: { id: req.params.id } })
+      .then((data) => {
+        if (data) {
+          res.json(data);
+        } else {
+          res.status(400).json({
+            error: "No se encontró una raza de perro con el ID indicado",
+          });
+        }
+      })
+      .catch((err) =>
         res.status(400).json({
           error: "No se encontró una raza de perro con el ID indicado",
-        });
-      }
-    });
+        })
+      );
+  }
 });
 
 router.post("/", (req, res) => {
-  res.json("holaaaaaa");
+  Dog.create(req.body)
+    .then((data) => data.addTemperaments(req.body.temperament))
+    .then((data) => res.json(data))
+    .catch((err) => res.status(400).json({ error: err.message }));
 });
 
 module.exports = router;
