@@ -1,0 +1,10 @@
+.div {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    border: 2px solid red;
+}
+
+.img {
+    width: 100px;
+}

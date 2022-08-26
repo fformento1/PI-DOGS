@@ -13,6 +13,7 @@ router.get("/", (req, res) => {
           image: el.image.url,
           temperaments: el.temperament,
           weight: el.weight.metric,
+          id: el.id,
         };
       })
     )
