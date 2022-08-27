@@ -3,6 +3,7 @@ import {
   GET_DOG,
   CREATE_DOG,
   GET_TEMPERAMENTS,
+  GET_DOG_BY_NAME,
 } from "../actions/index";
 
 const initialState = {
@@ -35,6 +36,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         temperaments: action.payload,
+      };
+
+    case GET_DOG_BY_NAME:
+      return {
+        ...state,
+        dog: action.payload,
       };
 
     default:
