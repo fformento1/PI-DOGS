@@ -1,8 +1,8 @@
 //Funcion para conseguir todos los temperamentos aunque esten repetidos.
 function conseguirTemperamentos(array) {
   let dogTemperament = array.map((el) => {
-    if (typeof el.temperament === "string") {
-      return el.temperament.split(",");
+    if (typeof el.temperaments === "string") {
+      return el.temperaments.split(",");
     }
   });
   dogTemperament = dogTemperament.flat();

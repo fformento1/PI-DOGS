@@ -1,6 +1,7 @@
 export const GET_ALL_DOGS = "GET_ALL_DOGS";
 export const GET_DOG = "GET_DOG";
 export const CREATE_DOG = "CREATE_DOG";
+export const GET_TEMPERAMENTS = "GET_TEMPERAMENTS";
 
 export const getAllDogs = () => (dispatch) => {
   return fetch("http://localhost:3001/dogs")
@@ -8,6 +9,17 @@ export const getAllDogs = () => (dispatch) => {
     .then((data) =>
       dispatch({
         type: GET_ALL_DOGS,
+        payload: data,
+      })
+    );
+};
+
+export const getTemperaments = () => (dispatch) => {
+  return fetch("http://localhost:3001/temperaments")
+    .then((data) => data.json())
+    .then((data) =>
+      dispatch({
+        type: GET_TEMPERAMENTS,
         payload: data,
       })
     );
