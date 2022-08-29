@@ -8,8 +8,10 @@ export const DogDetail = () => {
   const dog = useSelector((state) => state.dog);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getDog(id));
-  }, []);
+    if (id !== dog.id) {
+      dispatch(getDog(id));
+    }
+  }, [dog]);
 
   if (typeof dog.error === "string") {
     return (
