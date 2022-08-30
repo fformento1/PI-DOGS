@@ -56,12 +56,7 @@ export const createDog = (dogCreated) => (dispatch) => {
     },
     body: JSON.stringify(dogCreated),
   };
-  return fetch("http://localhost:3001/dogs", options)
-    .then((data) => data.json())
-    .then((data) =>
-      dispatch({
-        type: CREATE_DOG,
-        payload: data,
-      })
-    );
+  return fetch("http://localhost:3001/dogs", options).then((data) =>
+    data.json()
+  );
 };

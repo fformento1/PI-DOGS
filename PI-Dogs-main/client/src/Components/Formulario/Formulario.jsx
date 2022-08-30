@@ -1,17 +1,29 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createDog } from "../../redux/actions";
 import { useState } from "react";
 
 export const CreateDog = () => {
+  const temperaments = useSelector((state) => state.temperaments);
+  const [temperamento, setTemperamento] = useState([]);
   const [inputs, setInputs] = useState({});
-  const [errorNombre, setErrorNombre] = useState("");
-  const [errorAlturaMin, setErrorAlturaMin] = useState("");
-  const [errorAlturaMax, setErrorAlturaMax] = useState("");
-  const [errorPesoMin, setErrorPesoMin] = useState("");
-  const [errorPesoMax, setErrorPesoMax] = useState("");
-  const [errorAñosDeVidaMin, setErrorAñosDeVidaMin] = useState("");
-  const [errorAñosDeVidaMax, setErrorAñosDeVidaMax] = useState("");
+  const [errorNombre, setErrorNombre] = useState(" ");
+  const [errorAlturaMin, setErrorAlturaMin] = useState(" ");
+  const [errorAlturaMax, setErrorAlturaMax] = useState(" ");
+  const [errorPesoMin, setErrorPesoMin] = useState(" ");
+  const [errorPesoMax, setErrorPesoMax] = useState(" ");
+  const [errorAñosDeVidaMin, setErrorAñosDeVidaMin] = useState(" ");
+  const [errorAñosDeVidaMax, setErrorAñosDeVidaMax] = useState(" ");
+
+  function handleChangeTemperamento(e) {
+    setTemperamento([
+      ...temperamento,
+      {
+        name: e.target.value,
+        id: e.target.selectedOptions[0].id,
+      },
+    ]);
+  }
 
   function handleChange(e) {
     setInputs({
@@ -30,10 +42,10 @@ export const CreateDog = () => {
       errorPesoMin === "" &&
       errorPesoMax === "" &&
       inputs.name !== "" &&
-      inputs.weightMin !== "" &&
-      inputs.weightMax !== "" &&
-      inputs.heightMin !== "" &&
-      inputs.heightMax !== ""
+      inputs["weight min"] !== "" &&
+      inputs["weight max"] !== "" &&
+      inputs["height min"] !== "" &&
+      inputs["height max"] !== ""
     ) {
       let inputsOrdenado = {
         name: inputs.name,
@@ -42,8 +54,10 @@ export const CreateDog = () => {
         life_span:
           inputs["life_span min"] + " - " + inputs["life_span max"] + " years.",
         image: inputs.image,
+        temperament: temperamento.map((el) => el.id),
       };
       dispatch(createDog(inputsOrdenado));
+
       alert("¡Felicitaciones! Tu perro fue creado correctamente.");
     } else {
       alert("Completar todos los campos requeridos con los datos apropiados.");
@@ -150,12 +164,33 @@ export const CreateDog = () => {
         </div>
         <div>
           <label>Temperamento:</label>
-          <input
-            type="text"
-            name="temperament"
-            value={inputs.temperament}
-            onChange={(e) => handleChange(e)}
-          />
+          <select value={temperamento} onChange={handleChangeTemperamento}>
+            {temperaments.length > 0 ? (
+              temperaments.map((el) => (
+                <option id={el.id} key={el.id}>
+                  {el.name}
+                </option>
+              ))
+            ) : (
+              <option>Cargando...</option>
+            )}
+          </select>
+          <div>
+            {temperamento.map((el) => (
+              <span
+                id={el.id}
+                key={el.id}
+                onClick={(e) => {
+                  let temperamentoFiltrado = temperamento.filter(
+                    (element) => element.id !== el.id
+                  );
+                  setTemperamento(temperamentoFiltrado);
+                }}
+              >
+                {el.name}
+              </span>
+            ))}
+          </div>
         </div>
         <div>
           <label>Años de vida mínimos:</label>
@@ -204,7 +239,7 @@ export const CreateDog = () => {
           />
         </div>
         <div>
-          <button type="submit">Create Dog</button>
+          <input type="submit"></input>
         </div>
         <div>
           <p>Los campos marcados con un * son obligatorios.</p>

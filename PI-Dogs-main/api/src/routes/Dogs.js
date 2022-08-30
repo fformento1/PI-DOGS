@@ -8,17 +8,25 @@ router.get("/", (req, res) => {
     .then((data) => data.json())
     .then((data) =>
       data.map((el) => {
-        return {
+        let obj = {
           name: el.name,
           image: el.image.url,
           temperaments: el.temperament,
           weight: el.weight.metric,
           id: el.id,
         };
+        if (obj.temperaments) {
+          let tempToArray = obj.temperaments.split(", ");
+          let arrayTemp = tempToArray.map((e) => {
+            return { name: e.trim() };
+          });
+          obj.temperaments = arrayTemp;
+        } else obj.temperaments = [];
+        return obj;
       })
     )
     .then((data) => {
-      return Dog.findAll().then((el) => {
+      return Dog.findAll({ include: Temperament }).then((el) => {
         if (el.length !== 0) {
           return data.concat(el);
         } else {
@@ -51,14 +59,22 @@ router.get("/:id", (req, res) => {
       .then((data) => data.find((el) => el.id === parseInt(req.params.id)))
       .then((data) => {
         if (data) {
-          res.json({
+          let obj = {
             image: data.image.url,
             name: data.name,
-            temperament: data.temperament,
+            temperaments: data.temperament,
             height: data.height.metric,
             weight: data.weight.metric,
             life_span: data.life_span,
-          });
+          };
+          if (obj.temperaments) {
+            let tempToArray = obj.temperaments.split(", ");
+            let arrayTemp = tempToArray.map((e) => {
+              return { name: e.trim() };
+            });
+            obj.temperaments = arrayTemp;
+          } else obj.temperaments = [];
+          res.json(obj);
         } else {
           res.status(400).json({
             error: "No se encontró una raza de perro con el ID indicado",
@@ -66,10 +82,13 @@ router.get("/:id", (req, res) => {
         }
       });
   } else {
-    Dog.findOne({ where: { id: req.params.id } })
+    Dog.findOne({ include: Temperament, where: { id: req.params.id } })
       .then((data) => {
         if (data) {
-          res.json(data);
+          let nameData = data.temperaments.map((e) => e.name);
+          let stringData = nameData.join(", ");
+          data.temperaments = stringData;
+          return res.json(data);
         } else {
           res.status(400).json({
             error: "No se encontró una raza de perro con el ID indicado",

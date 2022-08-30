@@ -24,7 +24,12 @@ export const DogDetail = () => {
       <div>
         <img src={dog.image} alt="Imagen de perro." />
         <p>Nombre: {dog.name} </p>
-        <p>Temperamento: {dog.temperament} </p>
+        <p>
+          Temperamento:{" "}
+          {dog.temperaments?.map((e) => (
+            <span> {e.name}</span>
+          ))}{" "}
+        </p>
         <p>Altura: {dog.height} </p>
         <p>Peso: {dog.weight} </p>
         <p>Esperanza de vida: {dog.life_span} </p>
