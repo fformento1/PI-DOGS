@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import s from "../SearchBar/SearchBar.module.css";
 
 export const SearchBar = () => {
   const [buscar, setBuscar] = useState("");
@@ -9,7 +10,7 @@ export const SearchBar = () => {
   }
 
   return (
-    <div>
+    <div className={s.div}>
       <nav>
         <ul>
           <Link to={"/home/"}>

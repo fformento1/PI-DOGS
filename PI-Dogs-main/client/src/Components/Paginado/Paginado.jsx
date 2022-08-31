@@ -1,4 +1,5 @@
 import React from "react";
+import s from "../Paginado/Paginado.module.css";
 
 const Pagination = ({ dogsPerPage, totalDogs, paginate }) => {
   const pageNumbers = [];
@@ -8,9 +9,9 @@ const Pagination = ({ dogsPerPage, totalDogs, paginate }) => {
   }
   return (
     <nav>
-      <ul>
+      <ul className={s.pagination}>
         {pageNumbers.map((number) => (
-          <li key={number}>
+          <li key={number} className={s.listas}>
             <a onClick={() => paginate(number)}>{number}</a>
           </li>
         ))}

@@ -1,0 +1,10 @@
+.pagination {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+}
+
+.listas {
+    margin: 0.5rem;
+
+}

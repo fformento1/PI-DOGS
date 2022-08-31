@@ -59,46 +59,52 @@ export const DogCards = () => {
 
   return (
     <div className={s.div}>
-      <select onChange={(e) => handleFilterByApiDb(e)}>
-        <option>Todos</option>
-        <option>Creados</option>
-        <option>Existentes</option>
-      </select>
-      <select onChange={(e) => handleFilterByTemperament(e)}>
-        <option>Temperamentos</option>
-        {temperamentos.map((el) => {
-          return <option>{el.name}</option>;
-        })}
-      </select>
-      <select onChange={(e) => handleSortName(e)}>
-        <option>Nombre</option>
-        <option>A-Z</option>
-        <option>Z-A</option>
-      </select>
-      <select onChange={(e) => handleSortWeight(e)}>
-        <option>Peso</option>
-        <option>Menor peso</option>
-        <option>Mayor peso</option>
-      </select>
-      {dogs.length > 0 ? (
-        currentDogs.map((el) => (
-          <DogCard
-            image={el.image}
-            name={el.name}
-            temperament={el.temperaments}
-            weight={el.weight}
-            id={el.id}
-            key={el.id}
-          />
-        ))
-      ) : (
-        <h1>Cargando</h1>
-      )}
-      <Pagination
-        dogsPerPage={dogsPerPage}
-        totalDogs={dogs.length}
-        paginate={paginate}
-      />
+      <div>
+        <select onChange={(e) => handleFilterByApiDb(e)}>
+          <option>Todos</option>
+          <option>Creados</option>
+          <option>Existentes</option>
+        </select>
+        <select onChange={(e) => handleFilterByTemperament(e)}>
+          <option>Temperamentos</option>
+          {temperamentos.map((el) => {
+            return <option>{el.name}</option>;
+          })}
+        </select>
+        <select onChange={(e) => handleSortName(e)}>
+          <option>Nombre</option>
+          <option>A-Z</option>
+          <option>Z-A</option>
+        </select>
+        <select onChange={(e) => handleSortWeight(e)}>
+          <option>Peso</option>
+          <option>Menor peso</option>
+          <option>Mayor peso</option>
+        </select>
+      </div>
+      <div className={s.dogsContainer}>
+        {dogs.length > 0 ? (
+          currentDogs.map((el) => (
+            <DogCard
+              image={el.image}
+              name={el.name}
+              temperament={el.temperaments}
+              weight={el.weight}
+              id={el.id}
+              key={el.id}
+            />
+          ))
+        ) : (
+          <h1>Cargando</h1>
+        )}
+      </div>
+      <div>
+        <Pagination
+          dogsPerPage={dogsPerPage}
+          totalDogs={dogs.length}
+          paginate={paginate}
+        />
+      </div>
     </div>
   );
 };
