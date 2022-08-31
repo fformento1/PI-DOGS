@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getDog } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
+import s from "./DogCardDetail.module.css";
 
 export const DogDetail = () => {
   let { id } = useParams();
@@ -21,10 +22,10 @@ export const DogDetail = () => {
     );
   } else {
     return (
-      <div>
-        <img src={dog.image} alt="Imagen de perro." />
+      <div className={s.div}>
+        <img src={dog.image} alt="Imagen de perro." className={s.img} />
         <p>Nombre: {dog.name} </p>
-        <p>
+        <p className={s.divTemperamento}>
           Temperamento:{" "}
           {dog.temperaments?.map((e) => (
             <span> {e.name}</span>

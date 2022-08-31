@@ -2,14 +2,24 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    border: 2px solid rgb(222, 184, 135);
     flex-wrap: wrap;
-    background: url(../../../src/pngtree-cute-dog-tiled-background-yellow-bones-image_595778.jpg);
 }
 
 .dogsContainer {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
 }
 
+.divSelect {
+    display: flex;
+        flex-direction: row;
+        align-content: center;
+        justify-content: center;
+}
+
+.select {
+    margin: 1em;
+}

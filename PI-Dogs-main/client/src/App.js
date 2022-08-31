@@ -9,7 +9,7 @@ import { Route, Switch } from "react-router-dom";
 
 function App() {
   return (
-    <>
+    <div className="fotoDeFondo">
       <Route
         path={["/home", "/detail/:id", "/form", "/detailByName"]}
         component={SearchBar}
@@ -19,7 +19,7 @@ function App() {
       <Route path="/form" component={CreateDog} />
       <Route path="/detailByName" component={DogDetailByName} />
       <Route exact path="/" component={LandingPage} />
-    </>
+    </div>
   );
 }
 

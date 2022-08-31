@@ -8,15 +8,17 @@ const Pagination = ({ dogsPerPage, totalDogs, paginate }) => {
     pageNumbers.push(i);
   }
   return (
-    <nav>
-      <ul className={s.pagination}>
-        {pageNumbers.map((number) => (
-          <li key={number} className={s.listas}>
-            <a onClick={() => paginate(number)}>{number}</a>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <div>
+      <nav className={s.nav}>
+        <ul className={s.pagination}>
+          {pageNumbers.map((number) => (
+            <li key={number} className={s.listas}>
+              <a onClick={() => paginate(number)}>{number}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
   );
 };
 

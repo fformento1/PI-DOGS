@@ -12,14 +12,15 @@ export const SearchBar = () => {
   return (
     <div className={s.div}>
       <nav>
-        <ul>
+        <ul className={s.ul}>
           <Link to={"/home/"}>
-            <li>Home</li>
+            <li className={s.li}>Home</li>
           </Link>
           <Link to="/form">
-            <li>Create dog</li>
+            <li className={s.li}>Create dog</li>
           </Link>
           <input
+            className={s.li}
             placeholder="Buscar"
             onChange={(e) => {
               if (/^[A-Za-z\s]+$/g.test(e.target.value.trim())) {

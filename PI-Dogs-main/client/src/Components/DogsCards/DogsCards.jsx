@@ -59,28 +59,38 @@ export const DogCards = () => {
 
   return (
     <div className={s.div}>
-      <div>
-        <select onChange={(e) => handleFilterByApiDb(e)}>
+      <div className={s.divSelect}>
+        <select onChange={(e) => handleFilterByApiDb(e)} className={s.select}>
           <option>Todos</option>
           <option>Creados</option>
           <option>Existentes</option>
         </select>
-        <select onChange={(e) => handleFilterByTemperament(e)}>
+        <select
+          onChange={(e) => handleFilterByTemperament(e)}
+          className={s.select}
+        >
           <option>Temperamentos</option>
           {temperamentos.map((el) => {
             return <option>{el.name}</option>;
           })}
         </select>
-        <select onChange={(e) => handleSortName(e)}>
+        <select onChange={(e) => handleSortName(e)} className={s.select}>
           <option>Nombre</option>
           <option>A-Z</option>
           <option>Z-A</option>
         </select>
-        <select onChange={(e) => handleSortWeight(e)}>
+        <select onChange={(e) => handleSortWeight(e)} className={s.select}>
           <option>Peso</option>
           <option>Menor peso</option>
           <option>Mayor peso</option>
         </select>
+      </div>
+      <div>
+        <Pagination
+          dogsPerPage={dogsPerPage}
+          totalDogs={dogs.length}
+          paginate={paginate}
+        />
       </div>
       <div className={s.dogsContainer}>
         {dogs.length > 0 ? (
@@ -97,13 +107,6 @@ export const DogCards = () => {
         ) : (
           <h1>Cargando</h1>
         )}
-      </div>
-      <div>
-        <Pagination
-          dogsPerPage={dogsPerPage}
-          totalDogs={dogs.length}
-          paginate={paginate}
-        />
       </div>
     </div>
   );

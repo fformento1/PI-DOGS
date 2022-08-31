@@ -1,10 +1,29 @@
 .pagination {
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
     list-style: none;
+    align-items: center;
+    justify-content: center;
+    height: 2em;
+    width: 100%;
+    flex-wrap: wrap;
 }
 
 .listas {
     margin: 0.5rem;
+    padding: 0.5em;
+    width: 1.5em;
+    background-color: rgba(222, 184, 135, 0.555);
+    border-radius: 50%;
+}
 
+.listas:hover {
+    cursor: pointer;
+}
+
+.nav {
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
 }

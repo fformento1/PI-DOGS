@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import DogCard from "../DogCard/DogCard";
+import s from "./DogDetailByName.module.css";
 
 export const DogDetailByName = () => {
   const search = useLocation().search;
@@ -22,7 +23,7 @@ export const DogDetailByName = () => {
     );
   } else {
     return (
-      <div>
+      <div className={s.dogsContainer}>
         {dog.length > 0 ? (
           dog.map((el) => (
             <DogCard

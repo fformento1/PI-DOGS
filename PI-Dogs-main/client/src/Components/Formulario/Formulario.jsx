@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createDog } from "../../redux/actions";
 import { useState } from "react";
+import s from "./Formulario.module.css";
 
 export const CreateDog = () => {
   const temperaments = useSelector((state) => state.temperaments);
@@ -65,11 +66,12 @@ export const CreateDog = () => {
   }
 
   return (
-    <div>
-      <form onSubmit={(e) => handleSubmit(e)}>
+    <div className={s.divContainer}>
+      <form onSubmit={(e) => handleSubmit(e)} className={s.form}>
         <div>
-          <label>Nombre: *</label>
+          <label className={s.divLabel}>Nombre: *</label>
           <input
+            className={s.inputs}
             type="text"
             name="name"
             value={inputs.name}
@@ -82,11 +84,12 @@ export const CreateDog = () => {
               }
             }}
           />
-          <span>{errorNombre}</span>
         </div>
+        <span>{errorNombre}</span>
         <div>
-          <label>Altura mínima: *</label>
+          <label className={s.divLabel}>Altura mínima: *</label>
           <input
+            className={s.inputs}
             type="text"
             name="height min"
             value={inputs["height min"]}
@@ -101,11 +104,12 @@ export const CreateDog = () => {
               }
             }}
           />
-          <span>{errorAlturaMin}</span>
         </div>
+        <span>{errorAlturaMin}</span>
         <div>
-          <label>Altura máxima: *</label>
+          <label className={s.divLabel}>Altura máxima: *</label>
           <input
+            className={s.inputs}
             type="text"
             name="height max"
             value={inputs["height max"]}
@@ -123,11 +127,12 @@ export const CreateDog = () => {
               }
             }}
           />
-          <span>{errorAlturaMax}</span>
         </div>
+        <span>{errorAlturaMax}</span>
         <div>
-          <label>Peso mínimo: *</label>
+          <label className={s.divLabel}>Peso mínimo: *</label>
           <input
+            className={s.inputs}
             type="text"
             name="weight min"
             value={inputs["weight min"]}
@@ -140,11 +145,12 @@ export const CreateDog = () => {
               }
             }}
           />
-          <span>{errorPesoMin}</span>
         </div>
+        <span>{errorPesoMin}</span>
         <div>
-          <label>Peso máximo: *</label>
+          <label className={s.divLabel}>Peso máximo: *</label>
           <input
+            className={s.inputs}
             type="text"
             name="weight max"
             value={inputs["weight max"]}
@@ -160,10 +166,10 @@ export const CreateDog = () => {
               }
             }}
           />
-          <span>{errorPesoMax}</span>
         </div>
+        <span>{errorPesoMax}</span>
         <div>
-          <label>Temperamento:</label>
+          <label className={s.divLabel}>Temperamento:</label>
           <select value={temperamento} onChange={handleChangeTemperamento}>
             {temperaments.length > 0 ? (
               temperaments.map((el) => (
@@ -193,8 +199,9 @@ export const CreateDog = () => {
           </div>
         </div>
         <div>
-          <label>Años de vida mínimos:</label>
+          <label className={s.divLabel}>Años de vida mínimos:</label>
           <input
+            className={s.inputs}
             type="text"
             name="life_span min"
             value={inputs["life_span min"]}
@@ -207,11 +214,12 @@ export const CreateDog = () => {
               }
             }}
           />
-          <span>{errorAñosDeVidaMin}</span>
         </div>
+        <span>{errorAñosDeVidaMin}</span>
         <div>
-          <label>Años de vida máximos:</label>
+          <label className={s.divLabel}>Años de vida máximos:</label>
           <input
+            className={s.inputs}
             type="text"
             name="life_span max"
             value={inputs["life_span max"]}
@@ -227,11 +235,12 @@ export const CreateDog = () => {
               }
             }}
           />
-          <span>{errorAñosDeVidaMax}</span>
         </div>
+        <span>{errorAñosDeVidaMax}</span>
         <div>
-          <label>Imagen:</label>
+          <label className={s.divLabel}>Imagen:</label>
           <input
+            className={s.inputs}
             type="url"
             name="image"
             value={inputs.image}
