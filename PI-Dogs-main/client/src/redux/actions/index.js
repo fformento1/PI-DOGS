@@ -3,6 +3,10 @@ export const GET_DOG = "GET_DOG";
 export const CREATE_DOG = "CREATE_DOG";
 export const GET_TEMPERAMENTS = "GET_TEMPERAMENTS";
 export const GET_DOG_BY_NAME = "GET_DOG_BY_NAME";
+export const FILTER_BY_API_DB = "FILTER_BY_API_DB";
+export const FILTER_BY_TEMPERAMENT = "FILTER_BY_TEMPERAMENT";
+export const ORDER_BY_NAME = "ORDER_BY_NAME";
+export const ORDER_BY_WEIGHT = "ORDER_BY_WEIGHT";
 
 export const getAllDogs = () => (dispatch) => {
   return fetch("http://localhost:3001/dogs")
@@ -59,4 +63,32 @@ export const createDog = (dogCreated) => (dispatch) => {
   return fetch("http://localhost:3001/dogs", options).then((data) =>
     data.json()
   );
+};
+
+export const filterByApiDb = (payload) => {
+  return {
+    type: FILTER_BY_API_DB,
+    payload,
+  };
+};
+
+export const filterByTemperament = (payload) => {
+  return {
+    type: FILTER_BY_TEMPERAMENT,
+    payload,
+  };
+};
+
+export const orderByName = (payload) => {
+  return {
+    type: ORDER_BY_NAME,
+    payload,
+  };
+};
+
+export const orderByWeight = (payload) => {
+  return {
+    type: ORDER_BY_WEIGHT,
+    payload,
+  };
 };
