@@ -22,18 +22,20 @@ export const DogDetail = () => {
     );
   } else {
     return (
-      <div className={s.div}>
-        <img src={dog.image} alt="Imagen de perro." className={s.img} />
-        <p>Nombre: {dog.name} </p>
-        <p className={s.divTemperamento}>
-          Temperamento:{" "}
-          {dog.temperaments?.map((e) => (
-            <span> {e.name}</span>
-          ))}{" "}
-        </p>
-        <p>Altura: {dog.height} </p>
-        <p>Peso: {dog.weight} </p>
-        <p>Esperanza de vida: {dog.life_span} </p>
+      <div className={s.divContainer}>
+        <div className={s.div}>
+          <p>{dog.name} </p>
+          <img src={dog.image} alt="Imagen de perro." className={s.img} />
+          <p className={s.divTemperamento}>
+            Temperamento:{" "}
+            {dog.temperaments?.map((e) => (
+              <span> {e.name}</span>
+            ))}{" "}
+          </p>
+          <p>Altura: {dog.height} </p>
+          <p>Peso: {dog.weight} </p>
+          <p>Esperanza de vida: {dog.life_span} </p>
+        </div>
       </div>
     );
   }

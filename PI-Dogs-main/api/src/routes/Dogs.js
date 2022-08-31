@@ -80,7 +80,8 @@ router.get("/:id", (req, res) => {
             error: "No se encontró una raza de perro con el ID indicado",
           });
         }
-      });
+      })
+      .catch((err) => res.status(400).json({ error: err.message }));
   } else {
     Dog.findOne({ include: Temperament, where: { id: req.params.id } })
       .then((data) => {
