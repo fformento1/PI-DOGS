@@ -162,7 +162,9 @@ export const CreateDog = () => {
               ) {
                 setErrorPesoMax("");
               } else {
-                setErrorPesoMax("Solo puede contener números enteros");
+                setErrorPesoMax(
+                  "Solo puede contener números enteros mayores a peso mínimo"
+                );
               }
             }}
           />
