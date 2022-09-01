@@ -107,15 +107,6 @@ router.get("/:id", (req, res) => {
 router.post("/", (req, res) => {
   Dog.create(req.body)
     .then((data) => data.addTemperaments(req.body.temperament))
-    .then((data) =>
-      Dog.findOne({ include: Temperament, where: { name: req.body.name } })
-    )
-    .then((data) => {
-      let perrito = { ...req.body };
-      perrito.temperaments = data.temperaments.map((el) => el.name);
-      perrito.temperaments = perrito.temperaments.join(", ");
-      return perrito;
-    })
     .then((data) => res.json(data))
     .catch((err) => res.status(400).json({ error: err.message }));
 });
